@@ -1,0 +1,236 @@
+<ui version="4.0" >
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>708</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget" >
+   <layout class="QHBoxLayout" name="horizontalLayout_4" >
+    <item>
+     <widget class="QDockWidget" name="frakOptDockWidget" >
+      <property name="maximumSize" >
+       <size>
+        <width>301</width>
+        <height>524287</height>
+       </size>
+      </property>
+      <widget class="QWidget" name="dockWidgetContents" >
+       <layout class="QVBoxLayout" name="verticalLayout" >
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout" >
+          <item>
+           <widget class="QLabel" name="tiefeLabel" >
+            <property name="text" >
+             <string>Zu zeichnende Tiefe:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="TiefeSpinBox" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximum" >
+             <number>10000000</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout" >
+          <item row="0" column="0" >
+           <layout class="QHBoxLayout" name="horizontalLayout_3" >
+            <item>
+             <widget class="QLabel" name="zoomRechtsLabel" >
+              <property name="text" >
+               <string>Obere rechte Ecke:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3" >
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0" >
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0" >
+           <layout class="QHBoxLayout" name="horizontalLayout_2" >
+            <item>
+             <widget class="QLabel" name="zoomLinksLabel" >
+              <property name="text" >
+               <string>Untere linke Ecke:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_2" >
+              <property name="orientation" >
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0" >
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QLineEdit" name="zoomRechtsLineEdit" />
+          </item>
+          <item row="1" column="1" >
+           <widget class="QLineEdit" name="zoomLinksLineEdit" />
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer" >
+          <property name="orientation" >
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0" >
+           <size>
+            <width>20</width>
+            <height>440</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="Fraktal_Bild" native="1" name="FraktalBildWidget" >
+      <property name="minimumSize" >
+       <size>
+        <width>521</width>
+        <height>0</height>
+       </size>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2" >
+       <item row="1" column="0" >
+        <spacer name="horizontalSpacer_4" >
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>700</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="0" >
+        <spacer name="verticalSpacer_2" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1024</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDatei" >
+    <property name="title" >
+     <string>Datei</string>
+    </property>
+    <addaction name="actionFraktal_oeffnen" />
+    <addaction name="actionBild_speichern" />
+    <addaction name="separator" />
+    <addaction name="actionBeenden" />
+   </widget>
+   <addaction name="menuDatei" />
+  </widget>
+  <widget class="QStatusBar" name="statusbar" />
+  <action name="actionFraktal_oeffnen" >
+   <property name="text" >
+    <string>Fraktal öffnen...</string>
+   </property>
+  </action>
+  <action name="actionBild_speichern" >
+   <property name="text" >
+    <string>Bild speichern</string>
+   </property>
+  </action>
+  <action name="actionBeenden" >
+   <property name="text" >
+    <string>Beenden</string>
+   </property>
+  </action>
+  <action name="actionZeichne" >
+   <property name="text" >
+    <string>zeichne</string>
+   </property>
+  </action>
+  <action name="actionZoom" >
+   <property name="text" >
+    <string>Zoom</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Fraktal_Bild</class>
+   <extends>QWidget</extends>
+   <header>Graphische_Oberfl</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
