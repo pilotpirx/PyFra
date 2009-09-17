@@ -7,7 +7,7 @@ from mathe_graphic import *
 def save_fraktal(fraktal='Sierpinski',
                  method='mvkm',
                  file='out.png',
-                 depth=8,
+                 depth=6,
                  resolution=(1000, 1000)
                  ):
     fraktal_class = eval(fraktal)
