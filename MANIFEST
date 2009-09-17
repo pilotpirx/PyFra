@@ -1,3 +1,9 @@
 setup.py
+src/pyfra/Graphische_Oberfl.py
+src/pyfra/Oberfl_main.py
+src/pyfra/__init__.py
+src/pyfra/fraktale.py
+src/pyfra/gvkm.py
+src/pyfra/makefractal.py
 src/pyfra/matheGraphic.pyx
 src/pyfra/mvkm.pyx
