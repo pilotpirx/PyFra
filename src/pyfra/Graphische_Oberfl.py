@@ -1,8 +1,10 @@
-# coding=utf8
+# -*- coding: utf-8 -*-
+
 from PyQt4 import QtGui, QtCore, QtSvg
 import sys
 import Oberfl_main as Ui_Main
-from MatheGraphik import *
+from mathe_graphic import *
+from mvkm import *
 import numpy as n
 
 class Fraktal_Bild(QtGui.QWidget):
@@ -20,7 +22,7 @@ class Fraktal_Bild(QtGui.QWidget):
         if self._neues_fraktal:
             self.fPicture = QtGui.QPicture()
             painter = QtGui.QPainter(self.fPicture)
-            self.fraktal.zeichne_mit_tiefe(painter, 0.03, self.bild_koord_trans)
+            self.fraktal.zeichne_mit_tiefe(painter, 0.3, self.bild_koord_trans)
             painter.end()
         painter = QtGui.QPainter(self)
         painter.drawPicture(0, 0, self.fPicture)
