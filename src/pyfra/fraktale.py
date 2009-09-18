@@ -91,3 +91,28 @@ class Farn(_Fraktal):
     
     def um_rechteck(self):
         return Rect(array([-5,-2]), array([6,12]))
+    
+class Levy_C_Kurve_Was_anderes(_Fraktal):
+    def __init__(self, method='mvkm', start=None):
+        if start is None:
+            start = Line(array([0,0]), array([1,0]))
+        transformationen = [Transformation_by_angle(pi/4, factor=1/1.45),
+                            Transformation_by_angle(3*pi/4, factor=1/1.45, move=array([1,0]))]
+        _Fraktal.__init__(self, start, transformationen, method)
+        
+    def um_rechteck(self):
+        return Rect(array([-5,-5]), array([5,5]))
+
+class Levy_C_Kurve(_Fraktal):
+    def __init__(self, method='mvkm', start=None):
+        if start is None:
+            start = Line(array([0,0]), array([1,0]))
+        transformationen = [Transformation_by_angle(5*pi/4, factor=1/1.45, move=array([0.5,sqrt(2)/2/1.45])),
+                            Transformation_by_angle(3*pi/4, factor=1/1.45, move=array([1,0]))]
+        _Fraktal.__init__(self, start, transformationen, method)
+        
+    def um_rechteck(self):
+        return Rect(array([-1,-1]), array([2,2]))
+
+                        
+    

@@ -288,6 +288,12 @@ class Transformation(object):
             p = sum(m*m)
             return sqrt((p + sqrt(p**2 - 4*q)) / 2)
 
+def Transformation_by_angle(angle, factor=1, move=array([0,0])):
+    return Transformation(dot(array([[cos(angle), sin(angle)],
+                                     [sin(angle),-cos(angle)]]),
+                              array([[factor, 0],
+                                     [0, factor]])), move)
+
 
 class Bild_Koord_Trans(Transformation):
     def __init__(self, width, height, min, max):

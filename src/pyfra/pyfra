@@ -11,7 +11,8 @@ def save_fraktal(fraktal='Sierpinski',
                  method='mvkm',
                  file='out.png',
                  depth=6,
-                 resolution=(1000, 1000)
+                 resolution=(1000, 1000),
+                 antialiasing=False
                  ):
     fraktal_class = eval(fraktal)
     fraktal = fraktal_class(method)
@@ -20,8 +21,13 @@ def save_fraktal(fraktal='Sierpinski',
                                         min    = fraktal.um_rechteck().links_unten(),
                                         max    = fraktal.um_rechteck().rechts_oben()
                                         )
-    im = QtGui.QImage(resolution[0], resolution[1], QtGui.QImage.Format_Mono)
-    painter = QtGui.QPainter(im)
+    if antialiasing:
+        im = QtGui.QImage(resolution[0], resolution[1], QtGui.QImage.Format_RGB32)
+        painter = QtGui.QPainter(im)
+        painter.setRenderHint(QtGui.QPainter.Antialiasing)
+    else:
+        im = QtGui.QImage(resolution[0], resolution[1], QtGui.QImage.Format_Mono)
+        painter = QtGui.QPainter(im)
     painter.eraseRect(QtCore.QRect(0, 0, *resolution))
     fraktal.zeichne_mit_tiefe(depth, painter, bild_koord_trans)
     painter.end()
@@ -43,12 +49,16 @@ def main():
     parser.add_option("-r", "--resolution", dest="resolution", metavar='X Y',
                       action="store", type='int', nargs=2, default=(1000,1000),
                       help="Set the resolution of the picture to X times Y")
+    parser.add_option("-a", "--antialiasing", dest='antialiasing', action='store_true',
+                      default=False, help='use antialiasing for the picture')
     
     (options, args) = parser.parse_args()
     if len(args) != 1:
         parser.error("incorrect number of arguments\nPossible names are 'Sierpinsky', 'Kochkurve' or 'Farn' ")
     
-    save_fraktal(fraktal=args[0], method=options.method, depth=options.depth, file=options.filename, resolution=options.resolution)
+    save_fraktal(fraktal=args[0], method=options.method,
+                 depth=options.depth, file=options.filename,
+                 resolution=options.resolution, antialiasing=options.antialiasing)
     
 if __name__ == "__main__":
     main()
