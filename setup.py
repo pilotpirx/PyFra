@@ -20,5 +20,5 @@ setup(
                              ["src/pyfra/matheGraphic.pyx"]
                             )
                   ],
-    scripts=['src/pyfra/pyfra.py']
+    scripts=['src/pyfra/pyfra']
 )

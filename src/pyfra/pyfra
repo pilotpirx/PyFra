@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from PyQt4 import QtGui, QtCore, QtSvg
-from fraktale import *
-from mathe_graphic import *
+from pyfra.fraktale import *
+from pyfra.mathe_graphic import *
 
 from optparse import OptionParser
 

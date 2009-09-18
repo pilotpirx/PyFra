@@ -6,4 +6,4 @@ src/pyfra/fraktale.py
 src/pyfra/gvkm.py
 src/pyfra/matheGraphic.pyx
 src/pyfra/mvkm.pyx
-src/pyfra/pyfra.py
+src/pyfra/pyfra
