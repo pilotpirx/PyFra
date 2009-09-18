@@ -20,5 +20,5 @@ setup(
                              ["src/pyfra/matheGraphic.pyx"]
                             )
                   ],
-    scripts=['src/pyfra/Graphische_Oberfl.py', 'src/pyfra/makefractal.py']
+    scripts=['src/pyfra/pyfra.py']
 )
