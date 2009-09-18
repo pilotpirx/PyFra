@@ -12,7 +12,8 @@ def save_fraktal(fraktal='Sierpinski',
                  file='out.png',
                  depth=6,
                  resolution=(1000, 1000),
-                 antialiasing=False
+                 antialiasing=False,
+                 svg=False
                  ):
     fraktal_class = eval(fraktal)
     fraktal = fraktal_class(method)
@@ -21,17 +22,31 @@ def save_fraktal(fraktal='Sierpinski',
                                         min    = fraktal.um_rechteck().links_unten(),
                                         max    = fraktal.um_rechteck().rechts_oben()
                                         )
-    if antialiasing:
-        im = QtGui.QImage(resolution[0], resolution[1], QtGui.QImage.Format_RGB32)
-        painter = QtGui.QPainter(im)
-        painter.setRenderHint(QtGui.QPainter.Antialiasing)
+    if not svg:
+        if antialiasing:
+            im = QtGui.QImage(resolution[0], resolution[1], QtGui.QImage.Format_RGB32)
+            painter = QtGui.QPainter(im)
+            painter.setRenderHint(QtGui.QPainter.Antialiasing)
+        else:
+            im = QtGui.QImage(resolution[0], resolution[1], QtGui.QImage.Format_Mono)
+            painter = QtGui.QPainter(im)
+        painter.eraseRect(QtCore.QRect(0, 0, *resolution))
+        fraktal.zeichne_mit_tiefe(depth, painter, bild_koord_trans)
+        painter.end()
+        im.save(file)
     else:
-        im = QtGui.QImage(resolution[0], resolution[1], QtGui.QImage.Format_Mono)
-        painter = QtGui.QPainter(im)
-    painter.eraseRect(QtCore.QRect(0, 0, *resolution))
-    fraktal.zeichne_mit_tiefe(depth, painter, bild_koord_trans)
-    painter.end()
-    im.save(file)
+        generator = QtSvg.QSvgGenerator()
+        generator.setFileName(file)
+        generator.setSize(QtCore.QSize(resolution[0], resolution[1]))
+        generator.setViewBox(QtCore.QRect(0, 0, resolution[0], resolution[1]))
+        generator.setTitle(fraktal.__class__.__name__)
+        generator.setDescription("drawn by pyfra")
+        painter = QtGui.QPainter()
+        painter.begin(generator)
+        painter.eraseRect(QtCore.QRect(0, 0, *resolution))
+        fraktal.zeichne_mit_tiefe(depth, painter, bild_koord_trans)
+        painter.end()
+
 
 
 def main():
@@ -51,6 +66,8 @@ def main():
                       help="Set the resolution of the picture to X times Y")
     parser.add_option("-a", "--antialiasing", dest='antialiasing', action='store_true',
                       default=False, help='use antialiasing for the picture')
+    parser.add_option('-s', '--svg', dest='svg', action='store_true', default=False,
+                      help='save as .svg')
     
     (options, args) = parser.parse_args()
     if len(args) != 1:
@@ -58,7 +75,8 @@ def main():
     
     save_fraktal(fraktal=args[0], method=options.method,
                  depth=options.depth, file=options.filename,
-                 resolution=options.resolution, antialiasing=options.antialiasing)
+                 resolution=options.resolution, antialiasing=options.antialiasing,
+                 svg=options.svg)
     
 if __name__ == "__main__":
     main()
