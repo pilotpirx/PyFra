@@ -15,10 +15,16 @@ class _Fraktal(object):
             self.mvkm = MVKM(self.start, self.transformationen)
         elif method == 'gvkm':
             self.gvkm = GVKM(self.transformationen, wahrscheinlichkeiten)
+        elif method == 'adaptiv_mvkm':
+            self.mvkm = Adaptiv_MVKM(self.transformationen)
+        else:
+            raise ValueError("Method '%s' not found" % (method,))
 
     def zeichne_mit_tiefe(self, tiefe, g, bild_koord_trans):
         if self.method == 'mvkm':
             self.mvkm.get_graphisches_objekt_tiefe(tiefe).zeichne(g, bild_koord_trans)
+        elif  self.method == 'adaptiv_mvkm':
+            self.mvkm.zeichne_mit_tiefe(g, 0.1, bild_koord_trans)
         elif self.method == 'gvkm':
             self.gvkm.zeichne_mit_tiefe(g, tiefe, bild_koord_trans)
 
