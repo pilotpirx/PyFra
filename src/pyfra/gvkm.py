@@ -38,7 +38,7 @@ class GVKM(MVKM):
     """ Zeichnet das Fraktal mit der uebergebenen Anzahl Pixeln in
     das uebergebene Bild
     """
-    def zeichne_mit_tiefe(self, painter, punkte, bild_trans, 
+    def zeichne_mit_tiefe(self, imag, punkte, bild_trans, 
                           area=None, progress=False):
         if progress:
             t = punkte // 100
@@ -48,4 +48,5 @@ class GVKM(MVKM):
                 print "Zu %3i%% fertig" % ceil(float(i)/punkte*100)
             T = self._get_next_trans()
             p = T(p)
-            painter.drawPoint(*bild_trans(p))
+            pixel = bild_trans(p)
+            imag.setPixel(pixel[0], pixel[1], 1)

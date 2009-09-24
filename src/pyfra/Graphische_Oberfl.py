@@ -8,6 +8,7 @@ from mvkm import *
 import numpy as n
 from fraktale import *
 
+
 class Fraktal_Bild(QtOpenGL.QGLWidget):
     def __init__(self, *opts):
         QtGui.QWidget.__init__(self, *opts)

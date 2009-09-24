@@ -23,6 +23,12 @@ def save_fraktal(fraktal='Sierpinski',
                                         max    = fraktal.um_rechteck().rechts_oben()
                                         )
     if not svg:
+        if fraktal.requires_image():
+            im = QtGui.QImage(resolution[0], resolution[1], QtGui.QImage.Format_Mono)
+            im.fill(0)
+            fraktal.zeichne(im, bild_koord_trans)
+            im.save(file)
+            return
         if antialiasing:
             im = QtGui.QImage(resolution[0], resolution[1], QtGui.QImage.Format_RGB32)
             painter = QtGui.QPainter(im)
@@ -31,10 +37,12 @@ def save_fraktal(fraktal='Sierpinski',
             im = QtGui.QImage(resolution[0], resolution[1], QtGui.QImage.Format_Mono)
             painter = QtGui.QPainter(im)
         painter.eraseRect(QtCore.QRect(0, 0, *resolution))
-        fraktal.zeichne_mit_tiefe(depth, painter, bild_koord_trans)
+        fraktal.zeichne(painter, depth, bild_koord_trans)
         painter.end()
         im.save(file)
     else:
+        if fraktal.requires_image():
+            raise ValueError("can't show this Image as svg")
         generator = QtSvg.QSvgGenerator()
         generator.setFileName(file)
         generator.setSize(QtCore.QSize(resolution[0], resolution[1]))
@@ -44,7 +52,7 @@ def save_fraktal(fraktal='Sierpinski',
         painter = QtGui.QPainter()
         painter.begin(generator)
         painter.eraseRect(QtCore.QRect(0, 0, *resolution))
-        fraktal.zeichne_mit_tiefe(depth, painter, bild_koord_trans)
+        fraktal.zeichne(painter, depth, bild_koord_trans)
         painter.end()
 
 

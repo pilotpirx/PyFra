@@ -220,6 +220,9 @@ class Rect(Graphisches_Objekt):
     def zum_teil_in(self, objekt):
         """ TODO: noch schreiben"""
         return True
+    
+    def diag_size(self):
+        return sqrt(sum([i**2 for i in self.rechts_oben() - self.links_unten()]))
 
 
 class Dreieck(Graphisches_Objekt):
@@ -323,6 +326,15 @@ class Bild_Koord_Trans(Transformation):
     
     def get_verkl_faktor(self):
         return self.wh / (self.max - self.min)
+    
+    def pixel_size_diag(self):
+        u""" Gibt die Länge der Diagonale eines Pixels zurück
+        
+        >>> T = Bild_Koord_Trans(200, 100, array([-1, -1]), array([1, 1]))
+        >>> T.pixel_size_diag()
+        .000125
+        """
+        return sqrt(sum([i**2 for i in (self.max.astype(float) - self.min) / self.wh]))
 
 
 
