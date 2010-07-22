@@ -321,7 +321,12 @@ class Bild_Koord_Trans(Transformation):
             return gra_Obj.transformiere(self)
         elif isinstance(gra_Obj, ndarray):
             erg = (gra_Obj - self.min) * self.wh / (self.max - self.min)
-            erg[1] = self.wh[1] - erg[1]
+            erg[1] = self.wh[1] - erg[1]None, progress=False):
+        """ Zeichnet das Fraktal mit der uebergebenen Anzahl Pixeln in
+        das uebergebene Bild
+        """
+
+
             return erg.round().astype(int32)
     
     def get_verkl_faktor(self):

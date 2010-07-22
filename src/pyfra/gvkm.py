@@ -35,11 +35,12 @@ class GVKM(MVKM):
         return self.transf[i - 1]
     
     
-    """ Zeichnet das Fraktal mit der uebergebenen Anzahl Pixeln in
-    das uebergebene Bild
-    """
-    def zeichne_mit_tiefe(self, imag, punkte, bild_trans, 
-                          area=None, progress=False):
+    def get_pixmap(self, array, punkte, bild_trans, 
+                         area=None, progress=False):
+        """ Zeichnet das Fraktal mit der uebergebenen Anzahl Pixeln in
+        das uebergebene Bild
+        """
+
         if progress:
             t = punkte // 100
         p = self.punkt
@@ -50,3 +51,9 @@ class GVKM(MVKM):
             p = T(p)
             pixel = bild_trans(p)
             imag.setPixel(pixel[0], pixel[1], 1)
+
+    def has_vector_format(self):
+        return False
+
+    def get_vector(self, args*):
+        raise NotImplementedError("Can't save in vector format")

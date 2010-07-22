@@ -6,7 +6,12 @@ from numpy import *
 from gvkm import *
 
 class _Fraktal(object):
-    def __init__(self,start, transformationen, method='mvkm', wahrscheinlichkeiten=None):
+    def __init__(self,
+                 start,
+                 transformationen,
+                 method='mvkm',
+                 wahrscheinlichkeiten=None):
+
         self.start = start
         self.method=method
         self.transformationen = transformationen
@@ -23,9 +28,9 @@ class _Fraktal(object):
         return self.um_rechteck().diag_size()
 
 class _Fraktal_Painter(_Fraktal):
-    u""" Stellt Fraktale dar, die durch einen Painter gezeichnet werden können,
-    also keinen Zugang auf die einzelnen Pixel benötigen. Diese Fraktale können auch
-    als svg ausgegeben werden.
+    u""" Stellt Fraktale dar, die durch einen Painter gezeichnet werden
+    können, also keinen Zugang auf die einzelnen Pixel benötigen. Diese
+    Fraktale können auch als svg ausgegeben werden.
     """
     def __init__(self, start, transformationen, method='mvkm', wahrscheinlichkeiten=None):
         _Fraktal.__init__(self, start, transformationen, method, wahrscheinlichkeiten)
@@ -96,7 +101,7 @@ class Kochkurve(_Fraktal_Painter):
                                                   [0, 1/3.0]]), 
                                            array( [0, 0])), 
                             Transformation(array([[-1/6.0, -sqrt(3)/6], 
-                                                  [-sqrt(3)/6, 1/6.0]]), 
+                                                  [-sqrt(3)/6, 1/6.0]]),
                                            array( [0.5, sqrt(3)/6])),
                             Transformation(array([[-1/6.0, sqrt(3)/6], 
                                                   [sqrt(3)/6, 1/6.0]]), 

@@ -82,10 +82,16 @@ class MVKM(object):
         return self.tiefe_objekte_dict[tiefe]
     
     
-    def zeichne_mit_tiefe(self, imag, tiefe, bild_trans, 
-                          area=None, progress=False):
+    def get_pixmap(self, array, tiefe, bild_trans, 
+                         area=None, progress=False):
         for gr in self._gr_mit_tiefe_iter(tiefe, area, progress):
             gr.zeichne(imag, bild_trans)
+
+    def has_vector_format(self):
+        return True
+
+    def get_vector(self, args*):
+        raise NotImplementedError("Vector format output not yet implemented")
     
     def _gr_mit_tiefe_iter(self, tiefe, area, progress=False):
         raise NotImplementedError()
@@ -158,7 +164,7 @@ class Adaptiv_MVKM(object):
         raise NotImplementedError("Does not make sense for Adaptiv_MVKM")
     
     @cython.boundscheck(False)
-    def zeichne_alle_pixel(self, imag, bild_trans):
+    def get_pixmap(self, array, bild_trans):
         
         cdef double epsilon = bild_trans.pixel_size_diag() / 2.0
         
